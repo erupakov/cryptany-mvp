@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * Auth registration actions controller
+ * PHP Version 7
+ *
+ * @category Controller
+ * @package  App\Http\Controllers
+ * @author   Eugene Rupakov <eugene.rupakov@gmail.com>
+ * @license  Apache Common License 2.0
+ * @link     http://moblie.cryptany.io
+ */
 namespace App\Http\Controllers\Auth;
 
 use App\User;
@@ -7,6 +16,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+/**
+ * Auth registration page actions controller
+ *
+ * @category Controller
+ * @package  App\Http\Controllers
+ * @author   Eugene Rupakov <eugene.rupakov@gmail.com>
+ * @license  Apache Common License 2.0
+ * @link     http://cgw.cryptany.io
+ */
 class RegisterController extends Controller
 {
     /*
@@ -23,7 +41,13 @@ class RegisterController extends Controller
     use RegistersUsers;
     use \Jrean\UserVerification\Traits\VerifiesUsers;
 
-	protected $redirectAfterVerification = '/merchant/verified';
+    /**
+     * Where to redirect users after verification.
+     *
+     * @var string
+     */
+    protected $redirectAfterVerification = '/merchant/verified';
+
     /**
      * Where to redirect users after registration.
      *
@@ -44,7 +68,8 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data request data
+     *
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -59,7 +84,8 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data request data
+     *
      * @return \App\User
      */
     protected function create(array $data)

@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="inputItemPrice" class="col-sm-2 control-label">Item price</label>
+    <label for="inputItemPrice" class="col-sm-2 control-label">Item price *</label>
     <div class="col-sm-4">
     <input type="number" class="form-control" id="inputItemPrice" name="inputItemPrice" placeholder="Item price" >
     </div>
