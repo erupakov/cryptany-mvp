@@ -97,6 +97,7 @@ class MVPController extends Controller
         $user->hash = str_random(8);
         $user->secret = str_random(12);
         $user->email = $request->input('contactEmail');
+        $user->save();
 
         UserVerification::send($user, 'Cryptany merchant registration verification');
 
