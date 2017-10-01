@@ -114,7 +114,7 @@ $(document).ready(function() {
     body.html('<div style="width: 100%; text-align: center; margin: auto;"><button style="'+complexStyle+'">'+buttonText+'</button></div');
 
     });
-    
+
     $( "#inputButtonSize" ).change();
 });
 </script>

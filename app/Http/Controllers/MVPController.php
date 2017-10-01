@@ -11,6 +11,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use \Log;
 
@@ -80,13 +81,24 @@ class MVPController extends Controller
     {
         $request->validate(
             [
-            'contactEmail' => 'required|email',
+            'contactEmail' => 'required|unique:users|email',
             'currencyEth'=>'required',
             'g-recaptcha-response' => 'required|recaptcha'
             ]
         );
 
         Log::debug('Input data validated, going to create merchant');
+
+        $user = new \App\User;
+        $user->firstName = $request->input('inputFirstName');
+        $user->familyName = $request->input('inputFamilyName');
+        $user->projectName = $request->input('inputProjectName');
+        $user->projectURL = $request->input('inputProjectURL');
+        $user->hash = str_random(8);
+        $user->secret = str_random(12);
+        $user->email = $request->input('contactEmail');
+
+        UserVerification::send($user, 'Cryptany merchant registration verification');
 
         return view('merch.registered');
     }

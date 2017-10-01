@@ -26,6 +26,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use Jrean\UserVerification\Traits\VerifiesUsers;
+    use Jrean\UserVerification\Traits\UserVerification;
 
     /**
      * The attributes that are mass assignable.
