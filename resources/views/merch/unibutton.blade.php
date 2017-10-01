@@ -84,7 +84,7 @@
     <h3 class="panel-title">Button preview</h3>
   </div>
 <div class="panel-body">
-<button class="btn btn-primary">Buy now with Ether</button>
+<button class="btn btn-primary center-block">Buy now with Ether</button>
 </div>
 </div>
   <button type="submit" class="btn btn-default">Create button</button>
