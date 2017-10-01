@@ -21,6 +21,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use \Jrean\UserVerification\Traits\VerifiesUsers;
 
     /**
      * Where to redirect users after registration.

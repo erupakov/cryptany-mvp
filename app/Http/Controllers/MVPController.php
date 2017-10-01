@@ -14,6 +14,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use \Log;
+use \UserVerification;
 
 /**
  * All page actions controller
@@ -97,8 +98,10 @@ class MVPController extends Controller
         $user->hash = str_random(8);
         $user->secret = str_random(12);
         $user->email = $request->input('contactEmail');
+		$user->save();
 
-        UserVerification::send($user, 'Cryptany merchant registration verification');
+		UserVerification::generate($user);
+		UserVerification::send($user, 'Cryptany merchant registration verification');
 
         return view('merch.registered');
     }
