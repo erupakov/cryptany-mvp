@@ -84,7 +84,7 @@
     <h3 class="panel-title">Button preview</h3>
   </div>
 <div class="panel-body center-block" id="buttonPreview">
-<iframe frameborder="0"></iframe>
+<iframe frameborder="0" width="100%" height="90px"></iframe>
 </div>
 </div>
   <button type="submit" class="btn btn-default">Create button</button>
@@ -111,9 +111,11 @@ $(document).ready(function() {
     var frame = $('#buttonPreview iframe'),
         body = frame.contents().find('body');
 
-    body.html('<div style="width: 100%; margin: auto;"><button style="'+complexStyle+'">'+buttonText+'</button></div');
+    body.html('<div style="width: 100%; text-align: center; margin: auto;"><button style="'+complexStyle+'">'+buttonText+'</button></div');
 
     });
+    
+    $( "#inputButtonSize" ).change();
 });
 </script>
 @endsection
