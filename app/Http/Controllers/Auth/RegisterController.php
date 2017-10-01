@@ -23,6 +23,7 @@ class RegisterController extends Controller
     use RegistersUsers;
     use \Jrean\UserVerification\Traits\VerifiesUsers;
 
+	protected $redirectAfterVerification = '/merchant/verified';
     /**
      * Where to redirect users after registration.
      *

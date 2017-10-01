@@ -36,4 +36,7 @@ Route::get('/magento-2', 'MVPController@indexMagento2');
 Route::get('/merchant/register', 'MVPController@indexRegisterMerchant');
 Route::post('/merchant/register', 'MVPController@proceedRegisterMerchant');
 Route::get('/merchant/unibutton', 'MVPController@indexCreateButton');
+Route::get('/merchant/verified', function () {
+    return view('merch.verified');
+});
 Route::post('/merchant/unibutton', 'MVPController@proceedCreateButton');
