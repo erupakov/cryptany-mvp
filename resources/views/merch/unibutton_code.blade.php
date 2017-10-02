@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
 <div class="page-header center-block">
-<h1>Your button is ready</h1>
+<h1>Your buy now button is ready</h1>
 <div class="alert alert-warning" role="alert">
 В настоящий момент сервис Cryptany позволяет принимать платежи в одной криптовалюте - Ether.
 Если у вас еще нет кошелька для приема Ether, получите его по адресу <a href="https://github.com/ethereum/mist/releases">https://github.com/ethereum/mist/releases</a>
@@ -16,10 +16,12 @@
         <h3 class="panel-title">Please copy the button code below</h3>
     </div>
     <div class="panel-body">
-    <<textarea name="formButtonCode" id="formButtonCode" cols="30" rows="10">
+    <textarea name="formButtonCode" id="formButtonCode" cols="50" rows="10">
     {{ $buttonCode }}
     </textarea>
+	<div class="center-block">
     <button class="btn btn-success" id="btnCopyAddress" data-clipboard-target="#formButtonCode" name="CopyAddress">Copy code to clipboard</button>
+	</div>
     </div>
 </div>
 @endsection

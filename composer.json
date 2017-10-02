@@ -8,6 +8,7 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
         "greggilbert/recaptcha": "^2.2",
+        "guzzlehttp/guzzle": "~6.0",
         "jrean/laravel-user-verification": "^5.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0"

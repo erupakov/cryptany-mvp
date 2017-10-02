@@ -7,10 +7,15 @@ Click here to verify your account
 @endcomponent
 
 ## Please find your details below
+
 Merchant ID: {{ $user->hash }}
+
 Merchant Secret: {{ $user->secret }}
+
 Name: {{ $user->firstName }} {{ $user->familyName }}
+
 Project: {{ $user->projectName }}
+
 Project URL: {{ $user->projectURL }}
 
 Thanks,<br>

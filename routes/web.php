@@ -40,3 +40,5 @@ Route::get('/merchant/verified', function () {
     return view('merch.verified');
 });
 Route::post('/merchant/unibutton', 'MVPController@proceedCreateButton');
+Route::get('/payment/new', 'MVPController@proceedPaymentButton');
+Route::get('/payment/{id}', 'MVPController@showTransaction')->name('showTransaction');
