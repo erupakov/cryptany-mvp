@@ -2,28 +2,30 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ButtonCreated extends Mailable
+class UserActivatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-	public $subject = 'Cryptany transaction confirmed';
+	public $subject = 'Your merchant was activated';
 	public $from = [
 			['address'=>'support@cryptany.io', 'name'=>'Cryptany support']
 		];
 
+	private $_user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($u)
     {
-        //
+        $this->_user = $u;
     }
 
     /**
@@ -33,6 +35,6 @@ class ButtonCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.button_created');
+        return $this->markdown('emails.user_activated')->with('user',$this->_user);
     }
 }

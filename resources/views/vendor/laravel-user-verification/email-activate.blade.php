@@ -8,8 +8,20 @@ Please click here to verify your account
 Click here to verify your account
 @endcomponent
 
-After we complete all required checks we will confirm your registration and send you Merchant ID and Merchant Secret.
+## Please find your details below
+
+Merchant ID: {{ $user->hash }}
+
+Merchant Secret: {{ $user->secret }}
+
+Name: {{ $user->merchantName }}
+
+Wallet address: {{ $user->walletAddress }}
+
+Project URL: {{ $user->projectURL }}
+
+Contact person: {{ $user->contactPerson }}
 
 Thanks,<br>
-Cryptany team
+{{ config('app.name') }}
 @endcomponent

@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use \Log;
 use Carbon\Carbon;
 use \UserVerification;
+use \App\Events\MerchantCreatedEvent;
+use \Event;
 
 /**
  * All page actions controller
@@ -35,8 +37,8 @@ class MVPController extends Controller
     2 => 'Transaction is registered in blockchain and waiting for confirmation',
     3 => 'Transaction is confirmed in blockchain',
     4 => "We're processing transaction in our service center",
-    5 => "We've processed transaction successfully and preparing bank payment order",
-    6 => "We've sent funds to your bank account, waiting for destination arrival confirmation",
+    5 => "We've processed transaction successfully and preparing card payment order",
+    6 => "We've sent funds to your card",
     7 => "Transaction completed successfully and is currently marked as closed on our side",
     1000 => 'There was an error during transaction processing, reverting charges'
     ];
@@ -97,7 +99,11 @@ class MVPController extends Controller
         $request->validate(
             [
             'contactEmail' => 'required|unique:users|email',
-            'currencyEth'=>'required',
+            'inputFirstName' => 'required',
+            'inputWalletAddress' => 'required',
+            'inputProjectName' => 'required',
+            'inputProjectWeb' => 'required',
+            'inputProjectWeb' => 'required',
             'g-recaptcha-response' => 'required|recaptcha'
             ]
         );
@@ -105,10 +111,10 @@ class MVPController extends Controller
         Log::debug('Input data validated, going to create merchant');
 
         $user = new \App\User;
-        $user->firstName = $request->input('inputFirstName');
-        $user->familyName = $request->input('inputFamilyName');
-        $user->projectName = $request->input('inputProjectName');
+        $user->contactPerson = $request->input('inputFirstName');
+        $user->merchantName = $request->input('inputProjectName');
         $user->projectURL = $request->input('inputProjectWeb');
+        $user->walletAddress = $request->input('inputWalletAddress');
         $user->hash = str_random(8);
         $user->secret = str_random(12);
         $user->email = $request->input('contactEmail');
@@ -156,12 +162,12 @@ class MVPController extends Controller
 
         Log::debug('Input data validated, going to create wallet');
 
-        // get merchant
-        $merch = \App\User::where(['secret'=>$request->input('m_s')])->first();
-        if (!isset($merch)) {
-            Log::error('Merchant not found: '.$request->input('m_s'));
-            abort(403,'Merchant not found');
-        }
+		// get merchant
+		$merch = \App\User::where(['hash'=>$request->input('m_s')])->first();
+		if (!isset($merch)) {
+	        Log::error('Merchant not found: '.$request->input('m_s'));
+			abort(403,'Merchant not found');
+		}
 
         $contents = file_get_contents(
             "https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=USD"
@@ -214,7 +220,14 @@ class MVPController extends Controller
             'inputButtonText'=>'required'
             ]
         );
-        $user = \App\User::where(['hash'=>$request->input('inputMerchId'),'secret'=>$request->input('inputMerchSecret')])->first();
+        $user = \App\User::where(
+			[ 
+				'hash'=>$request->input('inputMerchId'),
+				'secret'=>$request->input('inputMerchSecret'),
+				'isActivated'=>true,
+				'verified'=>true,
+			]
+		)->first();
         if (!isset($user) || !$user->isVerified()) {
             Log::error('Cannot find merchant, error');
             return view('merch.notfound');
@@ -223,14 +236,14 @@ class MVPController extends Controller
         Log::debug('Input data validated, going to create button');
         
         $buttonRnd = random_int(0, PHP_INT_MAX);
-        $u_secret = $request->input('inputMerchSecret');
-        $i_name = $request->input('inputItemName');
-        $i_price = $request->input('inputItemPrice');
-        $i_curr = $request->input('inputItemCurrency');
-        $i_id = $request->input('inputItemID');
-        $b_size = $request->input('inputButtonSize');
-        $b_color = $request->input('inputButtonColor');
-        $b_text = $request->input('inputButtonText');
+		$u_secret = $request->input('inputMerchId');
+		$i_name = $request->input('inputItemName');
+		$i_price = $request->input('inputItemPrice');
+		$i_curr = $request->input('inputItemCurrency');
+		$i_id = $request->input('inputItemID');
+		$b_size = $request->input('inputButtonSize');
+		$b_color = $request->input('inputButtonColor');
+		$b_text = $request->input('inputButtonText');
 
         $complexStyle = 'font-family: Helvetica, arial; font-weight: bold; border: none; text-align: center; text-decoration: none; display: inline-block; box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 8px 10px 0 rgba(0,0,0,0.19); padding: 1em;';
         $complexStyle .= 'background-color: '.$b_color.'; color: white;';
@@ -293,6 +306,63 @@ BUTTON_TEXT;
             ]
         );
     }
+
+    /**
+     * Method for showing merchant verified
+     *
+     * @param Illuminate\Http\Request $request request to process
+     *
+     * @method merchantVerified
+     * @return View transaction view
+     */
+    public function merchantVerified(Request $request)
+    {
+	    return view('merch.verified');
+	}
+
+    /**
+     * Method for showing merchant info page
+     *
+     * @param Illuminate\Http\Request $request request to process
+     *
+     * @method showMerchantInfo
+     * @return View transaction view
+     */
+    public function showMerchantInfo(Request $request)
+    {
+        $request->validate(
+            [
+            'hash' => 'required|exists:users,hash',
+            ]
+        );
+        $user = \App\User::where(['hash'=>$request->input('hash')])->first();
+
+		return view('merch.info')->with('user',$user);
+	}
+
+    /**
+     * Method for showing merchant info page
+     *
+     * @param Illuminate\Http\Request $request request to process
+     *
+     * @method approveMerchantInfo
+     * @return View transaction view
+     */
+    public function approveMerchantInfo(Request $request)
+    {
+        $request->validate(
+            [
+            'hash' => 'required|exists:users,hash',
+            ]
+        );
+        $user = \App\User::where(['hash'=>$request->input('hash')])->first();
+		$user->isActivated = true;
+		$user->save();
+
+		Event::fire(new MerchantCreatedEvent($user));
+
+		return view('merch.activated');
+	}
 
     /**
      * Method for calling cryptogateway service

@@ -11,6 +11,11 @@ class MerchantCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+	public $subject = 'Cryptany transaction confirmed';
+	public $from = [
+			['address'=>'support@cryptany.io', 'name'=>'Cryptany support']
+		];
+
     /**
      * Create a new message instance.
      *

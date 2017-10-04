@@ -7,11 +7,10 @@
             <div class="page-header center-block">
                 <h1>New merchant verification: Success</h1>
                 <div class="alert alert-success" role="alert">
-                <p>Your verification was successful.</p>
+                <p>Your have successfully confirmed your email address</p>
                 <p style="margin-bottom: 2em;">
-                Now your can proceed and create buy now button to start receiving cryptopayments right away!
+After we complete all required checks we will confirm your registration and send you Merchant ID and Merchant Secret.
                 </p>
-                <a class="btn btn-primary" href="{{ url('/merchant/unibutton') }}">Create buybutton now</a>
                 </div>
             </div>
         </div>
