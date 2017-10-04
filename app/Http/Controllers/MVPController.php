@@ -156,12 +156,12 @@ class MVPController extends Controller
 
         Log::debug('Input data validated, going to create wallet');
 
-		// get merchant
-		$merch = \App\User::where(['secret'=>$request->input('m_s')])->first();
-		if (!isset($merch)) {
-	        Log::error('Merchant not found: '.$request->input('m_s'));
-			abort(403,'Merchant not found');
-		}
+        // get merchant
+        $merch = \App\User::where(['secret'=>$request->input('m_s')])->first();
+        if (!isset($merch)) {
+            Log::error('Merchant not found: '.$request->input('m_s'));
+            abort(403,'Merchant not found');
+        }
 
         $contents = file_get_contents(
             "https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=USD"
@@ -223,33 +223,32 @@ class MVPController extends Controller
         Log::debug('Input data validated, going to create button');
         
         $buttonRnd = random_int(0, PHP_INT_MAX);
-		$u_secret = $request->input('inputMerchSecret');
-		$i_name = $request->input('inputItemName');
-		$i_price = $request->input('inputItemPrice');
-		$i_curr = $request->input('inputItemCurrency');
-		$i_id = $request->input('inputItemID');
-		$b_size = $request->input('inputButtonSize');
-		$b_color = $request->input('inputButtonColor');
-		$b_text = $request->input('inputButtonText');
+        $u_secret = $request->input('inputMerchSecret');
+        $i_name = $request->input('inputItemName');
+        $i_price = $request->input('inputItemPrice');
+        $i_curr = $request->input('inputItemCurrency');
+        $i_id = $request->input('inputItemID');
+        $b_size = $request->input('inputButtonSize');
+        $b_color = $request->input('inputButtonColor');
+        $b_text = $request->input('inputButtonText');
 
         $complexStyle = 'font-family: Helvetica, arial; font-weight: bold; border: none; text-align: center; text-decoration: none; display: inline-block; box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 8px 10px 0 rgba(0,0,0,0.19); padding: 1em;';
-	    $complexStyle .= 'background-color: '.$b_color.'; color: white;';
+        $complexStyle .= 'background-color: '.$b_color.'; color: white;';
 
-	    if ($b_size=='L') {
-	        $complexStyle .= 'font-size: 20px; border-radius: 6px;';
-	    } elseif ($b_size=='M') {
-	        $complexStyle .= 'font-size: 16px; border-radius: 5px;';
-	    } else {
-	        $complexStyle .= 'font-size: 14px; border-radius: 3px;';
-	    }
+        if ($b_size=='L') {
+            $complexStyle .= 'font-size: 20px; border-radius: 6px;';
+        } elseif ($b_size=='M') {
+            $complexStyle .= 'font-size: 16px; border-radius: 5px;';
+        } else {
+            $complexStyle .= 'font-size: 14px; border-radius: 3px;';
+        }
 
         $buttonText = <<< BUTTON_TEXT
 <div id='cryptany-button-$buttonRnd'></div><script>(function(){var div = document.getElementById('cryptany-button-$buttonRnd');var b = document.createElement('a');b.href='https://mvp.brusnika.biz/payment/new?m_s=$u_secret&i_p=$i_price&i_c=$i_curr&i_i=$i_id&i_n=$i_name';b.innerText='$b_text';b.setAttribute('style','$complexStyle');div.appendChild(b);})();</script>
 BUTTON_TEXT;
-		Log::debug('Button code generated:'.$buttonText);
+        Log::debug('Button code generated:'.$buttonText);
         return view('merch.unibutton_code')->with('buttonCode',$buttonText);
     }
-
 
     /**
      * Method for handling transaction page
@@ -273,11 +272,11 @@ BUTTON_TEXT;
             return view('notfound');
         }
 
-		$transactionDate = new Carbon($txStatus['statusDate']);
-			
+        $transactionDate = new Carbon($txStatus['statusDate']);
+
         return view(
-                'payment.transaction',
-                [
+            'payment.transaction',
+            [
                     'address'=>$txStatus['address'],
                     'walletHash'=>$txStatus['walletHash'],
                     'srcAmount'=>$txStatus['srcAmount'],
@@ -291,7 +290,7 @@ BUTTON_TEXT;
 					'i_cur'=>$i_cur,
 					'm_project'=>$merch->projetName
 */
-                ]
+            ]
         );
     }
 
@@ -320,28 +319,28 @@ BUTTON_TEXT;
             ]
         );
 
-		try 
-		{
-	        $res = $client->request(
-	            'POST', $url, 
-	            [
-	                'form_params' => $data 
-	            ]
-	        );
+        try 
+        {
+            $res = $client->request(
+                'POST', $url, 
+                [
+                    'form_params' => $data 
+                ]
+            );
 
-	        Log::debug('Called service, got:'.$res->getStatusCode().':'.$res->getBody());
+            Log::debug('Called service, got:'.$res->getStatusCode().':'.$res->getBody());
 
-	        if ($res->getStatusCode()==200) { // request succeeded
-	            return json_decode($res->getBody(), true);
-	        } else {
-	            return false;
-    	    }
-		} catch (\GuzzleHttp\Exception\ClientException $ex) {
-			Log::error('Error calling CGW service not found error: '.$ex->getResponse()->getStatusCode());
-			return false;
-		} catch (\GuzzleHttp\Exception\TransferException $ex) {
-			Log::error('Other error occured calling CGW service: ['.$ex->getResponse()->getStatusCode().']: '.$ex->getResponse()->getBody());
-			return false;
-		}
+            if ($res->getStatusCode()==200) { // request succeeded
+                return json_decode($res->getBody(), true);
+            } else {
+                return false;
+            }
+        } catch (\GuzzleHttp\Exception\ClientException $ex) {
+            Log::error('Error calling CGW service not found error: '.$ex->getResponse()->getStatusCode());
+            return false;
+        } catch (\GuzzleHttp\Exception\TransferException $ex) {
+            Log::error('Other error occured calling CGW service: ['.$ex->getResponse()->getStatusCode().']: '.$ex->getResponse()->getBody());
+            return false;
+        }
     }
 }
