@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'Jrean\UserVerification\Events\UserVerified' => [
             'App\Listeners\UserVerificationListener',
         ],
+        'App\Events\MerchantCreatedEvent' => [
+            'App\Listeners\UserVerificationListener@onActivate',
+        ],
     ];
 
     /**

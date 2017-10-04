@@ -8,11 +8,14 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserVerifiedMail extends Mailable
+class UserActivatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-	public $subject = 'New merchant registered';
+	public $subject = 'Your merchant was activated';
+	public $from = [
+			['address'=>'support@cryptany.io', 'name'=>'Cryptany support']
+		];
 
 	private $_user;
     /**
@@ -32,6 +35,6 @@ class UserVerifiedMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.user_verified')->with('user',$this->_user);
+        return $this->markdown('emails.user_activated')->with('user',$this->_user);
     }
 }

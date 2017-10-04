@@ -70,7 +70,7 @@
 <div class="form-group">
 {!! Recaptcha::render() !!}
 </div>
-  <button type="submit" class="btn btn-default">Submit</button>
+  <button type="submit" class="btn btn-success btn-lg">Submit</button>
 </form>
   </div>
 </div>

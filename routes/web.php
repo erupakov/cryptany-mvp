@@ -41,4 +41,4 @@ Route::post('/merchant/unibutton', 'MVPController@proceedCreateButton');
 Route::get('/payment/new', 'MVPController@proceedPaymentButton');
 Route::get('/payment/{id}', 'MVPController@showTransaction')->name('showTransaction');
 Route::get('/merchant/updateStatus87561', 'MVPController@showMerchantInfo');
-Route::post('/merchant/updateStatus87561', 'MVPController@approveMerchantInfo')->name('updateMerchantStatus');
+Route::post('/merchant/updateStatus87561', 'MVPController@approveMerchantInfo');

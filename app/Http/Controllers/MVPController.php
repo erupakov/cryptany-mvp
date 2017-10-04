@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use \Log;
 use Carbon\Carbon;
 use \UserVerification;
+use \App\Events\MerchantCreatedEvent;
+use \Event;
 
 /**
  * All page actions controller
@@ -161,7 +163,7 @@ class MVPController extends Controller
         Log::debug('Input data validated, going to create wallet');
 
 		// get merchant
-		$merch = \App\User::where(['secret'=>$request->input('m_s')])->first();
+		$merch = \App\User::where(['hash'=>$request->input('m_s')])->first();
 		if (!isset($merch)) {
 	        Log::error('Merchant not found: '.$request->input('m_s'));
 			abort(403,'Merchant not found');
@@ -218,7 +220,14 @@ class MVPController extends Controller
             'inputButtonText'=>'required'
             ]
         );
-        $user = \App\User::where(['hash'=>$request->input('inputMerchId'),'secret'=>$request->input('inputMerchSecret')])->first();
+        $user = \App\User::where(
+			[ 
+				'hash'=>$request->input('inputMerchId'),
+				'secret'=>$request->input('inputMerchSecret'),
+				'isActivated'=>true,
+				'verified'=>true,
+			]
+		)->first();
         if (!isset($user) || !$user->isVerified()) {
             Log::error('Cannot find merchant, error');
             return view('merch.notfound');
@@ -227,7 +236,7 @@ class MVPController extends Controller
         Log::debug('Input data validated, going to create button');
         
         $buttonRnd = random_int(0, PHP_INT_MAX);
-		$u_secret = $request->input('inputMerchSecret');
+		$u_secret = $request->input('inputMerchId');
 		$i_name = $request->input('inputItemName');
 		$i_price = $request->input('inputItemPrice');
 		$i_curr = $request->input('inputItemCurrency');
@@ -329,7 +338,7 @@ BUTTON_TEXT;
         );
         $user = \App\User::where(['hash'=>$request->input('hash')])->first();
 
-		return view('merch.info',compact($user));
+		return view('merch.info')->with('user',$user);
 	}
 
     /**
@@ -337,10 +346,10 @@ BUTTON_TEXT;
      *
      * @param Illuminate\Http\Request $request request to process
      *
-     * @method processMerchantInfo
+     * @method approveMerchantInfo
      * @return View transaction view
      */
-    public function processMerchantInfo(Request $request)
+    public function approveMerchantInfo(Request $request)
     {
         $request->validate(
             [
@@ -350,6 +359,8 @@ BUTTON_TEXT;
         $user = \App\User::where(['hash'=>$request->input('hash')])->first();
 		$user->isActivated = true;
 		$user->save();
+
+		Event::fire(new MerchantCreatedEvent($user));
 
 		return view('merch.activated');
 	}
