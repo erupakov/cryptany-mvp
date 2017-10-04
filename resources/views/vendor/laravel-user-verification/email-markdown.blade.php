@@ -1,23 +1,15 @@
 @component('mail::message')
 
-One last step left!
+Thank you for registering the new merchant in the Cryptany system!
+
+Please click here to verify your account
 
 @component('mail::button', ['url' => route('email-verification.check', $user->verification_token) . '?email=' . urlencode($user->email) ])
 Click here to verify your account
 @endcomponent
 
-## Please find your details below
-
-Merchant ID: {{ $user->hash }}
-
-Merchant Secret: {{ $user->secret }}
-
-Name: {{ $user->firstName }} {{ $user->familyName }}
-
-Project: {{ $user->projectName }}
-
-Project URL: {{ $user->projectURL }}
+After we complete all required checks we will confirm your registration and send you Merchant ID and Merchant Secret.
 
 Thanks,<br>
-{{ config('app.name') }}
+Cryptany team
 @endcomponent

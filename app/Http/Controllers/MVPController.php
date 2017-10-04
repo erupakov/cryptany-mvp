@@ -35,8 +35,8 @@ class MVPController extends Controller
     2 => 'Transaction is registered in blockchain and waiting for confirmation',
     3 => 'Transaction is confirmed in blockchain',
     4 => "We're processing transaction in our service center",
-    5 => "We've processed transaction successfully and preparing bank payment order",
-    6 => "We've sent funds to your bank account, waiting for destination arrival confirmation",
+    5 => "We've processed transaction successfully and preparing card payment order",
+    6 => "We've sent funds to your card",
     7 => "Transaction completed successfully and is currently marked as closed on our side",
     1000 => 'There was an error during transaction processing, reverting charges'
     ];
@@ -97,7 +97,11 @@ class MVPController extends Controller
         $request->validate(
             [
             'contactEmail' => 'required|unique:users|email',
-            'currencyEth'=>'required',
+            'inputFirstName' => 'required',
+            'inputWalletAddress' => 'required',
+            'inputProjectName' => 'required',
+            'inputProjectWeb' => 'required',
+            'inputProjectWeb' => 'required',
             'g-recaptcha-response' => 'required|recaptcha'
             ]
         );
@@ -105,10 +109,10 @@ class MVPController extends Controller
         Log::debug('Input data validated, going to create merchant');
 
         $user = new \App\User;
-        $user->firstName = $request->input('inputFirstName');
-        $user->familyName = $request->input('inputFamilyName');
-        $user->projectName = $request->input('inputProjectName');
+        $user->contactPerson = $request->input('inputFirstName');
+        $user->merchantName = $request->input('inputProjectName');
         $user->projectURL = $request->input('inputProjectWeb');
+        $user->walletAddress = $request->input('inputWalletAddress');
         $user->hash = str_random(8);
         $user->secret = str_random(12);
         $user->email = $request->input('contactEmail');
@@ -294,6 +298,61 @@ BUTTON_TEXT;
                 ]
         );
     }
+
+    /**
+     * Method for showing merchant verified
+     *
+     * @param Illuminate\Http\Request $request request to process
+     *
+     * @method merchantVerified
+     * @return View transaction view
+     */
+    public function merchantVerified(Request $request)
+    {
+	    return view('merch.verified');
+	}
+
+    /**
+     * Method for showing merchant info page
+     *
+     * @param Illuminate\Http\Request $request request to process
+     *
+     * @method showMerchantInfo
+     * @return View transaction view
+     */
+    public function showMerchantInfo(Request $request)
+    {
+        $request->validate(
+            [
+            'hash' => 'required|exists:users,hash',
+            ]
+        );
+        $user = \App\User::where(['hash'=>$request->input('hash')])->first();
+
+		return view('merch.info',compact($user));
+	}
+
+    /**
+     * Method for showing merchant info page
+     *
+     * @param Illuminate\Http\Request $request request to process
+     *
+     * @method processMerchantInfo
+     * @return View transaction view
+     */
+    public function processMerchantInfo(Request $request)
+    {
+        $request->validate(
+            [
+            'hash' => 'required|exists:users,hash',
+            ]
+        );
+        $user = \App\User::where(['hash'=>$request->input('hash')])->first();
+		$user->isActivated = true;
+		$user->save();
+
+		return view('merch.activated');
+	}
 
     /**
      * Method for calling cryptogateway service
