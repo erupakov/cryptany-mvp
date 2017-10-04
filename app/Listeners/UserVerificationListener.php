@@ -36,7 +36,7 @@ class UserVerificationListener
         $u = $event->user;
 
         Mail::to('support@cryptany.io')
-        ->send(new UserVerifiedMail($u));
+        ->queue(new UserVerifiedMail($u));
     }
 
     /**
@@ -50,9 +50,8 @@ class UserVerificationListener
 		//Send email to support
         // send mail about successful transaction creation
         $u = $event->user;
-		Log::debug('User in activate:'.print_r($event,true));
 
         Mail::to($u->email)
-        ->send(new UserActivatedMail($u));
+        ->queue(new UserActivatedMail($u));
     }
 }

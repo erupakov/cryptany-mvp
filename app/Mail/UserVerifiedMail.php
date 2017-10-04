@@ -32,6 +32,7 @@ class UserVerifiedMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.user_verified')->with('user',$this->_user);
+        return $this->markdown('emails.user_verified')->with('user',$this->_user)
+			->with('url','https://mvp.brusnika.biz/merchant/updateStatus87561?hash='.$this->_user->hash);
     }
 }

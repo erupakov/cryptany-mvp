@@ -3,7 +3,7 @@
 
 You need to approve it by visiting the following link:
 
-@component('mail::button', ['url' => 'https://mvp.brusnika.biz/merchant/updateStatus87561?hash={{ $user->hash }}'])
+@component('mail::button', ['url' => $url ])
 Review merchant
 @endcomponent
 
