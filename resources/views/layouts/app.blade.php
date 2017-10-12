@@ -18,6 +18,7 @@
 
         <!-- Styles -->
         <link href="{{ url('/css/cryptany.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url('/css/lightbox.min.css') }}" rel="stylesheet">        
     </head>
     <body>
     <nav class="navbar navbar-default">
