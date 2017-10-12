@@ -11,7 +11,7 @@
 Если у вас еще нет кошелька для приема Ether, получите его по адресу <a href="https://github.com/ethereum/mist/releases">https://github.com/ethereum/mist/releases</a>
 </div>
 
-<form method="post" action="/merchant/unibutton" class="form-horizontal">
+<form method="post" action="{{ url('/merchant/unibutton') }}" class="form-horizontal">
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">To register new buy now button please fill in fields below</h3>
