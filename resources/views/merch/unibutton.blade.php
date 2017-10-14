@@ -7,7 +7,7 @@
 <div class="page-header center-block">
 <h1>Create new payment button</h1>
 
-<form method="post" action="/merchant/unibutton" class="form-horizontal">
+<form method="post" action="{{ url('/merchant/unibutton') }}" class="form-horizontal">
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">To create new payment button please fill in fields below</h3>

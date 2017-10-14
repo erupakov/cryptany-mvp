@@ -8,7 +8,7 @@
         <title>Cryptany MVP</title>
 
         <!-- Fonts -->
-        <link href="/css/font.css" rel="stylesheet" type="text/css">
+        <link href="{{ url('/css/font.css') }}" rel="stylesheet" type="text/css">
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
         <!-- Styles -->
-        <link href="/css/cryptany.css" rel="stylesheet" type="text/css">
+        <link href="{{ url('/css/cryptany.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url('/css/lightbox.min.css') }}" rel="stylesheet">        
     </head>
     <body>
     <nav class="navbar navbar-default">

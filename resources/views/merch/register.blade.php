@@ -15,7 +15,7 @@
     <h3 class="panel-title">Please provide the following information to register a new merchant</h3>
   </div>
   <div class="panel-body">
-  <form method="post" action="/merchant/register">
+  <form method="post" action="{{ url('/merchant/register') }}">
   {{ csrf_field() }}
   <div class="form-group">
     <label for="inputProjectName">Merchant Name *</label>
