@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'support@cryptany.io'),
-        'name' => env('MAIL_FROM_NAME', 'Support service'),
+        'name' => env('MAIL_FROM_NAME', 'Cryptany support'),
     ],
 
     /*

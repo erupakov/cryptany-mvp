@@ -5,16 +5,12 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
 <div class="page-header center-block">
-<h1>Create new buy now button</h1>
-<div class="alert alert-warning" role="alert">
-В настоящий момент сервис Cryptany позволяет принимать платежи в одной криптовалюте - Ether.
-Если у вас еще нет кошелька для приема Ether, получите его по адресу <a href="https://github.com/ethereum/mist/releases">https://github.com/ethereum/mist/releases</a>
-</div>
+<h1>Create new payment button</h1>
 
 <form method="post" action="/merchant/unibutton" class="form-horizontal">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">To register new buy now button please fill in fields below</h3>
+    <h3 class="panel-title">To create new payment button please fill in fields below</h3>
   </div>
   <div class="panel-body">
   {{ csrf_field() }}
@@ -46,15 +42,15 @@
     <label for="inputItemCurrency" class="col-sm-2 control-label">Item sell currency</label>
     <div class="col-sm-4">
     <select class="form-control" id="inputItemCurrency" name="inputItemCurrency" required>
-        <option value="USD" selected>US dollars</option>
-        <option value="EUR">Euro</option>
-        <option value="RUB">Russian roubles</option>
-        <option value="CHF">Swiss franc</option>
-        <option value="CAD">Canada dollars</option>
-        <option value="CNY">Chinese yuan</option>
-        <option value="JPY">Japan yen</option>
-        <option value="AUD">Australia dollars</option>
-        <option value="INR">Indian rupee</option>
+        <option value="USD" selected>USD</option>
+        <option value="EUR">EUR</option>
+        <option value="RUR">RUR</option>
+        <option value="CHF">CHF</option>
+        <option value="CAD">CAD</option>
+        <option value="CNY">CNY</option>
+        <option value="JPY">JPY</option>
+        <option value="AUD">AUD</option>
+        <option value="INR">INR</option>
     </select>
     </div>
   </div>

@@ -12,7 +12,7 @@ class UserActivatedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-	public $subject = 'Your merchant was activated';
+	public $subject = 'Merchant activation';
 	public $from = [
 			['address'=>'support@cryptany.io', 'name'=>'Cryptany support']
 		];
@@ -35,6 +35,6 @@ class UserActivatedMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.user_activated')->with('user',$this->_user);
+        return $this->view('emails.user_activated')->with('user',$this->_user);
     }
 }

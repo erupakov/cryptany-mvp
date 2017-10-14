@@ -1,5 +1,7 @@
 @component('mail::message')
 
+Dear merchant!
+
 Thank you for registering the new merchant in the Cryptany system!
 
 Please click here to verify your account

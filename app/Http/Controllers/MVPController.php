@@ -121,7 +121,7 @@ class MVPController extends Controller
         $user->save();
 
         UserVerification::generate($user);
-        UserVerification::send($user, 'Cryptany merchant registration verification');
+        UserVerification::send($user, 'Merchant registration');
 
         return view('merch.registered');
     }

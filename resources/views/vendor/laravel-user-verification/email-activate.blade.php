@@ -23,5 +23,5 @@ Project URL: {{ $user->projectURL }}
 Contact person: {{ $user->contactPerson }}
 
 Thanks,<br>
-{{ config('app.name') }}
+Cryptany team
 @endcomponent

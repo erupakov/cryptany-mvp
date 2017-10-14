@@ -5,18 +5,14 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
 <div class="page-header center-block">
-<h1>Your buy now button is ready</h1>
-<div class="alert alert-warning" role="alert">
-В настоящий момент сервис Cryptany позволяет принимать платежи в одной криптовалюте - Ether.
-Если у вас еще нет кошелька для приема Ether, получите его по адресу <a href="https://github.com/ethereum/mist/releases">https://github.com/ethereum/mist/releases</a>
-</div>
+<h1>Your payment button is ready</h1>
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Please copy the button code below</h3>
+        <h3 class="panel-title">Please copy the HTML button code below and insert it into your site between &lt;body&gt; tags</h3>
     </div>
     <div class="panel-body">
-    <textarea name="formButtonCode" id="formButtonCode" cols="50" rows="10">
+    <textarea name="formButtonCode" id="formButtonCode" cols="80" rows="10">
     {{ $buttonCode }}
     </textarea>
 	<div class="center-block">
