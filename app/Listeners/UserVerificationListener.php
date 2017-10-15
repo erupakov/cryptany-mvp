@@ -55,6 +55,6 @@ class UserVerificationListener
         ->queue(new UserActivatedMail($u));
 
 		// pass the newly created merchant to cgw
-		$t = file_get_contents("https://cgw.cryptany.io/data/regapiuser?id=".urlencode($u->hash)."&secret=".urlencode($u->secret));
+		$t = file_get_contents("https://cgw.cryptany.io/data/regapiuser?id=".urlencode($u->hash)."&secret=".urlencode($u->secret)."&w=".urlencode($u->walletAddress));
     }
 }
