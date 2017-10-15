@@ -19,7 +19,7 @@
     <div class="col-sm-4">
     <input type="text" class="form-control" id="inputMerchId" name="inputMerchId" placeholder="Merchant ID" required>
     </div>
-    <label for="inputMerchSecret" class="col-sm-2 control-label">Merchant secret (from email) *</label>
+    <label for="inputMerchSecret" class="col-sm-2 control-label">Merchant Pass Code (from email) *</label>
     <div class="col-sm-4">
     <input type="text" class="form-control" id="inputMerchSecret" name="inputMerchSecret" placeholder="Merchant secret" required>
     </div>

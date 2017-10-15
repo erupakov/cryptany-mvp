@@ -170,15 +170,15 @@ class MVPController extends Controller
 		}
 
         $contents = file_get_contents(
-            "https://api.coinmarketcap.com/v1/ticker/ethereum/?convert=USD"
+            "https://cgw.cryptany.io/data/rate"
         );
         $eth_data = json_decode($contents, true);
-            
+
         // create new wallet
         $addressArr = $this->_call_cryptany_service(
             'data/addr', [
                 'email'=>$merch->email,
-                'srcAmount'=>number_format((float)$request->input('i_p')/(float)$eth_data[0]['price_usd'], 6),
+                'srcAmount'=>number_format((float)$request->input('i_p')/(float)$eth_data['rate'], 6),
                 'dstAmount'=>$request->input('i_p'),
                 'plastic_card'=>'',
                 'validity_date'=>''
@@ -257,7 +257,7 @@ class MVPController extends Controller
         }
 
         $buttonText = <<< BUTTON_TEXT
-<div id='cryptany-button-$buttonRnd'></div><script>(function(){var div = document.getElementById('cryptany-button-$buttonRnd');var b = document.createElement('a');b.href='https://mvp.brusnika.biz/payment/new?m_s=$u_secret&i_p=$i_price&i_c=$i_curr&i_i=$i_id&i_n=$i_name';b.innerText='$b_text';b.setAttribute('style','$complexStyle');div.appendChild(b);})();</script>
+<div id='cryptany-button-$buttonRnd'></div><script>(function(){var div = document.getElementById('cryptany-button-$buttonRnd');var b = document.createElement('a');b.href='https://mvp.cryptany.io/payment/new?m_s=$u_secret&i_p=$i_price&i_c=$i_curr&i_i=$i_id&i_n=$i_name';b.innerText='$b_text';b.setAttribute('style','$complexStyle');div.appendChild(b);})();</script>
 BUTTON_TEXT;
         Log::debug('Button code generated:'.$buttonText);
         return view('merch.unibutton_code')->with('buttonCode',$buttonText);

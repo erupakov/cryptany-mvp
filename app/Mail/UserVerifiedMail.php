@@ -33,6 +33,6 @@ class UserVerifiedMail extends Mailable
     public function build()
     {
         return $this->view('emails.user_verified')->with('user',$this->_user)
-			->with('url','https://mvp.brusnika.biz/merchant/updateStatus87561?hash='.$this->_user->hash);
+			->with('url','https://mvp.cryptany.io/merchant/updateStatus87561?hash='.$this->_user->hash);
     }
 }

@@ -39,7 +39,7 @@
                     </li>
                     <li>
                     After checks successfully passed we will activate the account and you will receive an email with 
-                    Merchant ID and Merchand Secret you will use in all our products.
+                    Merchant ID and Merchand Pass Code you will use in all our products.
                     <a href="{{ url('/img/reg_merch_5.png') }}" data-lightbox="image-5" data-title="Registration step 5"><img src="{{ url('/img/reg_merch_5.png') }}" class="img-responsible" width="120px;"></a>
                     </li>
                 </ol>
@@ -70,7 +70,7 @@
 <li>Open Sales -> Payment methods section
 <a href="{{ url('/img/mag1_config_2.png') }}" data-lightbox="image-8" data-title="Configuration step 2"><img src="{{ url('/img/mag1_config_2.png') }}" class="img-responsible" width="120px;"></a>
 </li>
-<li>Locate Cryptany Payment Gateway section, open it and fill in Merchant ID and Merchant Secret (1,2) fields with values from merchant activation email and press Save config button (3).
+<li>Locate Cryptany Payment Gateway section, open it and fill in Merchant ID and Merchant Pass Code (1,2) fields with values from merchant activation email and press Save config button (3).
 <a href="{{ url('/img/mag1_config_3.png') }}" data-lightbox="image-8" data-title="Configuration step 3"><img src="{{ url('/img/mag1_config_3.png') }}" class="img-responsible" width="120px;"></a>
 </li>
 </ol>
