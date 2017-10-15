@@ -47,11 +47,14 @@ class UserVerificationListener
      */
     public function onActivate(\App\Events\MerchantCreatedEvent $event)
     {
-		//Send email to support
-        // send mail about successful transaction creation
+		// Send email to merchant
+        // send mail about successful transaction activation
         $u = $event->user;
 
         Mail::to($u->email)
         ->queue(new UserActivatedMail($u));
+
+		// pass the newly created merchant to cgw
+		$t = file_get_contents("https://cgw.cryptany.io/data/regapiuser?id=".urlencode($u->hash)."&secret=".urlencode($u->secret));
     }
 }

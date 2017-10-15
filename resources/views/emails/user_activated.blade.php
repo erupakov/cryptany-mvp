@@ -1,17 +1,17 @@
 <p>Dear merchant,</p>
 
-<p>We have successfully activated your merchant account.</p>
+<p>Your merchant account has been successfully activated.</p>
 
 <p>Details:</p>
 
 <ul>
 <li>Merchant name: {{ $user->merchantName }}</li>
 <li>Merchant ID: {{ $user->hash }}</li>
-<li>Merchant secret: {{ $user->secret }}</li>
+<li>Merchant Pass Code: {{ $user->secret }}</li>
 <li>Project URL: {{ $user->projectURL }}</li>
 </ul>
 
-<p>Please open <a href="https://mvp.brusnika.biz/merchant/unibutton">this link</a> to create the new payment button.</p>
+<p>Please open this link to create a Cryptopayment button for your website:<a href="{{ url('/merchant/unibutton') }}">Payment button</a></p>
 
 Thanks,<br>
-Cryptany team
+the Cryptany team
