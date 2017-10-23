@@ -140,6 +140,43 @@ class MVPController extends Controller
         return view('merch.unibutton');
     }
 
+
+    /**
+     * Method for processing button payment
+     *
+     * @param Request $request Http request to parse
+     *
+     * @method paymentButtonEnterEmail
+     *
+     * @return View New Transfer view
+     */
+    public function paymentButtonEnterEmail(Request $request)
+    {
+        $request->validate(
+            [
+            'm_s' => 'required',
+            'i_p' => 'required',
+            'i_c' => 'required',
+            'i_n' => 'required'
+            ]
+        );
+
+        Log::debug('Input data validated, going to enter email address');
+
+		// get merchant
+		$merch = \App\User::where(['hash'=>$request->input('m_s')])->first();
+		if (!isset($merch)) {
+	        Log::error('Merchant not found: '.$request->input('m_s'));
+			abort(403,'Merchant not found');
+		}
+
+		// show enter your email view
+		return view('payment.email')->with( ['i_p'=>$request->input('i_p'),
+			'm_s' => $request->input('m_s'),
+			'i_c' => $request->input('i_c'),
+			'i_n' => $request->input('i_n')]);
+	}
+
     /**
      * Method for processing button payment
      *
@@ -156,7 +193,8 @@ class MVPController extends Controller
             'm_s' => 'required',
             'i_p' => 'required',
             'i_c' => 'required',
-            'i_n' => 'required'
+            'i_n' => 'required',
+			'inputEmail' => 'required|email'
             ]
         );
 
@@ -176,12 +214,11 @@ class MVPController extends Controller
 
         // create new wallet
         $addressArr = $this->_call_cryptany_service(
-            'data/addr', [
-                'email'=>$merch->email,
+            'merchant/button', [
+                'email'=>$request->input('inputEmail'),
                 'srcAmount'=>number_format((float)$request->input('i_p')/(float)$eth_data['rate'], 6),
                 'dstAmount'=>$request->input('i_p'),
-                'plastic_card'=>'',
-                'validity_date'=>''
+				'merchant'=>$request->input('m_s')
             ]
         );
 
