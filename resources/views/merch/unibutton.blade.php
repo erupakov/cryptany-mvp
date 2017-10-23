@@ -4,7 +4,7 @@
 <main class="content">
             <div class="inner">
                 <div class="breadcrumbs">
-                    <a href="browser.history.back();">Back</a>
+                    <a href="javascript:history.go(-1);">Back</a>
                 </div>
 
                 <h2>Create cryptopayment button</h2>

@@ -103,7 +103,6 @@ class MVPController extends Controller
             'inputWalletAddress' => 'required',
             'inputProjectName' => 'required',
             'inputProjectWeb' => 'required',
-            'inputProjectWeb' => 'required',
             'g-recaptcha-response' => 'required|recaptcha'
             ]
         );
