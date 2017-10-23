@@ -1,66 +1,88 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="content txt">
-<div class="inner">
-    <div class="breadcrumbs">
-        <a href="javascript:history.go(-1);">Back</a>
-    </div>
+<div style="margin: 2em 3em;">
+            <div class="page-header center-block">
+                <h2>Magento 1.x CE plugin installation</h2>
+                <p>Please follow this steps to install and configure Magento 1.x Community Edition payment plugin</p>
+            </div>
 
-    <h2>Merchant signup</h2>
-    <p>1. You need to have a crypto wallet that accepts Ether currency.<br>If not, please create one on <a href="https://www.myetherwallet.com">https://www.myetherwallet.com</a>
-    </p>
-    <p>
-        <img src="{{ url('img/ht1.jpg') }}" alt="">
-    </p>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">1. Register merchant</h4>
+                </div>
+                <div class="panel-body center-block">
+                <ol>
+                    <li>Click <a href="{{ url('/merchant/register') }}">this link</a> to go to the merchant registration page.</li>
+                    <li>Fill in all required fields in registration form
+                    <a href="{{ url('/img/reg_merch_1.png') }}" data-lightbox="image-5" data-title="Registration step 1"><img src="{{ url('/img/reg_merch_1.png') }}" class="img-responsible" width="120px;"></a>
+                    </li>
+                    <ol>
+                        <li>Merchant name (for example, your store name)</li>
+                        <li>Site URL</li>
+                        <li>Your Ethereum wallet address to receive crypto to</li>
+                        <li>Contact email (it will be validated, it should be unique througout our system)</li>
+                        <li>Contact person</li>
+                    </ol>
+                    <li>Press Submit button and get a successfull registration message:
+                    <a href="{{ url('/img/reg_merch_2.png') }}" data-lightbox="image-5" data-title="Registration step 2"><img src="{{ url('/img/reg_merch_2.png') }}" class="img-responsible" width="120px;"></a>
+                    </li>
+                    <li>After a few minutes you'll receive an email address validation message to you mailbox.
+                    You may need to look into Spam folder in case email provider filters it out</li>
+                    <li>Click the verification link you received in an email
+                    <a href="{{ url('/img/reg_merch_3.png') }}" data-lightbox="image-5" data-title="Registration step 3"><img src="{{ url('/img/reg_merch_3.png') }}" class="img-responsible" width="120px;"></a>
+                    </li>
+                    <li>After you verified your email address we will performs some KYC and ALM checks that can take some time.
+                    <a href="{{ url('/img/reg_merch_4.png') }}" data-lightbox="image-5" data-title="Registration step 4"><img src="{{ url('/img/reg_merch_4.png') }}" class="img-responsible" width="120px;"></a>
+                    </li>
+                    <li>
+                    After checks successfully passed we will activate the account and you will receive an email with 
+                    Merchant ID and Merchand Pass Code you will use in all our products.
+                    <a href="{{ url('/img/reg_merch_5.png') }}" data-lightbox="image-5" data-title="Registration step 5"><img src="{{ url('/img/reg_merch_5.png') }}" class="img-responsible" width="120px;"></a>
+                    </li>
+                </ol>
+                </div>
+            </div>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">2. Install Magento 1.x CE plugin</h4>
+                </div>
+                <div class="panel-body center-block">
+                <p>To install plugin simply unzip the contents of the package into root directory of the Magento 1.x CE installation. 
+                None of the existing files will be overwritten.
+                <a href="{{ url('/img/mag1_config_4.png') }}" data-lightbox="image-7" data-title="Installation"><img src="{{ url('/img/mag1_config_4.png') }}" class="img-responsible" width="120px;"></a>
+                </p>
+                </div>
+            </div>
 
-    <p>2. Contact us and provide this information in order to be verified:</p>
-    <ul>
-        <li>Website</li>
-        <li>Main contact name and email address</li>
-        <li>Wallet address (public key)</li>
-    </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">3. Configure Magento 1.x CE plugin</h4>
+                </div>
+                <div class="panel-body center-block">
+<ol>
+<li>Open store admin panel and go to System -> Configuration menu
+<a href="{{ url('/img/mag1_config_1.png') }}" data-lightbox="image-8" data-title="Configuration step 1"><img src="{{ url('/img/mag1_config_1.png') }}" class="img-responsible" width="120px;"></a>
+</li>8
+<li>Open Sales -> Payment methods section
+<a href="{{ url('/img/mag1_config_2.png') }}" data-lightbox="image-8" data-title="Configuration step 2"><img src="{{ url('/img/mag1_config_2.png') }}" class="img-responsible" width="120px;"></a>
+</li>
+<li>Locate Cryptany Payment Gateway section, open it and fill in Merchant ID and Merchant Pass Code (1,2) fields with values from merchant activation email and press Save config button (3).
+<a href="{{ url('/img/mag1_config_3.png') }}" data-lightbox="image-8" data-title="Configuration step 3"><img src="{{ url('/img/mag1_config_3.png') }}" class="img-responsible" width="120px;"></a>
+</li>
+</ol>
+                </div>
+            </div>
 
-    <p>If verified, we will provide you with the “Client ID”, “Client Secret” required<br>to setup “Buy now” button integration as described below.</p>
-
-    <hr>
-
-    <h2>Setup "Buy now" button</h2>
-    <p>1. Visit "Buy now" button creation page</p>
-    <p>2. Set "Client ID", "Client pass code" that were provided to you by our team in the first step.<br> You can also define "Return URL" where users should be redirected when purchase is completed.</p>
-    <p>
-        <img src="{{ url('img/ht2.jpg') }}" alt="">
-    </p>
-
-    <p>3. Set product information that you are going to sell via Monetha "Buy now" button</p>
-    <ul>
-        <li>Product name</li>
-        <li>Price and Taxes</li>
-        <li>Item ID (your internal id, for order tracking)</li>
-    </ul>
-    <p>
-        <img src="{{ url('img/ht3.jpg') }}" alt="">
-    </p>
-
-    <p>4. Customze button text and size.<br>Cick "Create button" after you add all required information.</p>
-    <p>
-        <img src="{{ url('img/ht4.jpg') }}" alt="">
-    </p>
-    <hr>
-
-    <h2>Add button to your site</h2>
-    <p>1. After you click "Create button" HTML code and required Javascript code will be generated.</p>
-    <p>
-        <img src="{{ url('img/ht5.jpg') }}" alt="">
-    </p>
-    <p>2. Place this code in your site depending on configuration.<br> E.g. in Wordpress you can simply put button and javascript code on the same page.</p>
-
+            <div>
+                <h4 class="panel-title">4. You are ready</h4>
+                <p>Congratulations! Now you're ready to receive payments in your store using Ethereum and decentralized trust management and escrow from Cryptany!</p>
+            </div>
+			<div style="padding-bottom: 4em;">&nbsp;</div>
 </div>
-</main>
-<!-- .content -->
-
 @endsection
 @section('add-js')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="{{ url('/js/lightbox.min.js') }}"></script>
 @endsection

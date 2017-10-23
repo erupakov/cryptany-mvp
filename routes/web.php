@@ -31,6 +31,12 @@ Route::get('/bounty', function () {
 Route::get('/tokens', function () {
     return view('tokens');
 });
+Route::get('/terms', function () {
+    return view('terms');
+});
+Route::get('/button', function () {
+    return view('button_guide');
+});
 Route::get('/magento-1', 'MVPController@indexMagento1');
 Route::get('/magento-2', 'MVPController@indexMagento2');
 Route::get('/merchant/register', 'MVPController@indexRegisterMerchant');

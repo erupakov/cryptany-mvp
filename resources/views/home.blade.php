@@ -64,8 +64,8 @@
                     <div class="inner">
                         <h3>Create a Cryptopayment<br>button for your web site</h3>
                         <p class="grayed">A quick and easy gateway solution for receiving<br>cryptocurrency payments directly on your website.</p>
-                        <button class="cc cryptbutton">Cryptopayment</button>
-                        <a class="small" href="{{ url('/merchant/unibutton') }}">Create your button now</a>
+                        <button class="cc cryptbutton" style="cursor: default;">Cryptopayment</button>
+                        <a class="small" href="{{ url('/button') }}">Create your button now</a>
                     </div>
                 </div>
             </section>
@@ -81,11 +81,11 @@
             <a class="center" href="mailto:info@cryptany.io">info@cryptany.io</a>
             <ul class="social">
                 <li><a href="https://www.github.com/cryptany/cryptany"><span class="icon icon-gh"></span></a></li>
-                <li><a href="https://twitter.com/projectcryptany"><span class="icon icon-twit"></span></a></li>
-                <li><a href="#"><span class="icon icon-fb"></span></a></li>
-                <li><a href="#"><span class="icon icon-ig"></span></a></li>
-                <li><a href="#"><span class="icon icon-slack"></span></a></li>
-                <li><a href="#"><span class="icon icon-telegram"></span></a></li>
+                <li><a href="https://twitter.com/ProjectCryptany"><span class="icon icon-twit"></span></a></li>
+                <li><a href="https://www.facebook.com/cryptany/"><span class="icon icon-fb"></span></a></li>
+                <li><a href="https://www.instagram.com/cryptany.io/"><span class="icon icon-ig"></span></a></li>
+                <li><a href="https://cryptany.herokuapp.com"><span class="icon icon-slack"></span></a></li>
+                <li><a href="https://t.me/cryptany.io"><span class="icon icon-telegram"></span></a></li>
             </ul>
         </div>
     </footer>

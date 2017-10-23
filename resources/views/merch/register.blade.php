@@ -50,7 +50,7 @@
 			        </p>
                     @endif                    
                     <div class="check">
-                        <input type="checkbox" name="termsRead"><span class="small grayed">I have read and agree with the <a href="#">Cryptany Terms of Use</a></span><br>
+                        <input type="checkbox" name="termsRead"><span class="small grayed">I have read and agree with the <a target="_blank" href="{{ url('/terms') }}">Cryptany Terms of Use</a></span><br>
                     </div>
                     {!! Recaptcha::render() !!}
                     <button type="submit" class="btn-green">Submit</button>

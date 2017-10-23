@@ -30,12 +30,12 @@
                         </div>
                     </div>
                     <ul class="f3c clearfix">
-                        <li class="c1"><input type="text" name="itxt" class="itxt js-butcng" placeholder="Button text"></li>
+                        <li class="c1"><input type="text" name="inputButtonText" class="itxt js-butcng" placeholder="Button text"></li>
                         <li class="c2"><span class="lbl">Choose button size</span>
                             <select class="sel xsize right js-butcng" id="inputButtonSize" name="inputButtonSize" required>
-						<option value="M" selected>Medium</option>
-						<option value="S">Small</option>
-						<option value="L">Large</option>
+						<option value="medium" selected>Medium</option>
+						<option value="small">Small</option>
+						<option value="large">Large</option>
 					    </select>
                         </li>
                         <li class="c3">
@@ -57,28 +57,9 @@
 
 @endsection
 @section('add-js')
-<script>
-$(document).ready(function() {
-    $( ".form-control" ).change(function() {
-        var complexStyle = 'font-family: Helvetica, arial; font-weight: bold; border: none; text-align: center; text-decoration: none; display: inline-block; box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 8px 10px 0 rgba(0,0,0,0.19); padding: 1em;';
-	    var buttonText = $('#inputButtonText').val();
-
-	    complexStyle += 'background-color: ' + $('#inputButtonColor').val() + '; color: white;';
-	    if ($('#inputButtonSize').val()=='L') {
-	        complexStyle += 'font-size: 20px; border-radius: 6px;';
-	    } else if ($('#inputButtonSize').val()=='M') {
-	        complexStyle += 'font-size: 16px; border-radius: 5px;';
-	    } else {
-	        complexStyle += 'font-size: 14px; border-radius: 3px;'
-	    }
-
-	    var frame = $('#buttonPreview iframe'),
-	        body = frame.contents().find('body');
-
-	    body.html('<div style="width: 100%; text-align: center; margin: auto;"><button style="'+complexStyle+'">'+buttonText+'</button></div');
-    });
-
-    $( "#inputButtonSize" ).change();
-});
-</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="{{ url('js/colpick.js') }}"></script>
+<script src="{{ url('js/button.js') }}"></script>
+<link href="{{ url('css/mvp.css') }}" rel="stylesheet">
+<link href="{{ url('css/colpick.css') }}" rel="stylesheet">
 @endsection

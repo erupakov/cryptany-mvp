@@ -9,7 +9,7 @@ function CbuttonSet() {
     $('#cbtn').css('background-color',$('.colorbox').css('background-color'));
     $('#cbtn').removeClass('medium').removeClass('small').removeClass('large').addClass($(".xsize").val());
 }
-    
+
 $('.colorbox').colpick({
 	layout:'rgbhex',
 	color:'55288c',
