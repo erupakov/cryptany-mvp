@@ -98,7 +98,7 @@ class MVPController extends Controller
     {
         $request->validate(
             [
-            'contactEmail' => 'required|unique:users|email',
+            'contactEmail' => 'required|unique:users,email|email',
             'inputFirstName' => 'required',
             'inputWalletAddress' => 'required',
             'inputProjectName' => 'required',
@@ -163,19 +163,23 @@ class MVPController extends Controller
 
         Log::debug('Input data validated, going to enter email address');
 
-		// get merchant
-		$merch = \App\User::where(['hash'=>$request->input('m_s')])->first();
-		if (!isset($merch)) {
-	        Log::error('Merchant not found: '.$request->input('m_s'));
-			abort(403,'Merchant not found');
-		}
+        // get merchant
+        $merch = \App\User::where(['hash'=>$request->input('m_s')])->first();
+        if (!isset($merch)) {
+            Log::error('Merchant not found: '.$request->input('m_s'));
+            abort(403,'Merchant not found');
+        }
 
-		// show enter your email view
-		return view('payment.email')->with( ['i_p'=>$request->input('i_p'),
-			'm_s' => $request->input('m_s'),
-			'i_c' => $request->input('i_c'),
-			'i_n' => $request->input('i_n')]);
-	}
+        // show enter your email view
+        return view('payment.email')->with(
+            [
+                'i_p'=>$request->input('i_p'),
+                'm_s' => $request->input('m_s'),
+                'i_c' => $request->input('i_c'),
+                'i_n' => $request->input('i_n')
+            ]
+        );
+    }
 
     /**
      * Method for processing button payment
@@ -194,18 +198,18 @@ class MVPController extends Controller
             'i_p' => 'required',
             'i_c' => 'required',
             'i_n' => 'required',
-			'inputEmail' => 'required|email'
+            'inputEmail' => 'required|email'
             ]
         );
 
         Log::debug('Input data validated, going to create wallet');
 
-		// get merchant
-		$merch = \App\User::where(['hash'=>$request->input('m_s')])->first();
-		if (!isset($merch)) {
-	        Log::error('Merchant not found: '.$request->input('m_s'));
-			abort(403,'Merchant not found');
-		}
+        // get merchant
+        $merch = \App\User::where(['hash'=>$request->input('m_s')])->first();
+        if (!isset($merch)) {
+            Log::error('Merchant not found: '.$request->input('m_s'));
+            abort(403,'Merchant not found');
+        }
 
         $contents = file_get_contents(
             "https://cgw.cryptany.io/data/rate"
@@ -218,13 +222,13 @@ class MVPController extends Controller
                 'email'=>$request->input('inputEmail'),
                 'srcAmount'=>number_format((float)$request->input('i_p')/(float)$eth_data['rate'], 6),
                 'dstAmount'=>$request->input('i_p'),
-				'merchant'=>$request->input('m_s')
+                'merchant'=>$request->input('m_s')
             ]
         );
 
         if ($addressArr===false) {
             Log::error('Error calling cgw service');
-            abort(403,'Error processing payment');
+            abort(403, 'Error processing payment');
         }
 
         return redirect()->route(
@@ -258,13 +262,13 @@ class MVPController extends Controller
             ]
         );
         $user = \App\User::where(
-			[ 
-				'hash'=>$request->input('inputMerchId'),
-				'secret'=>$request->input('inputMerchSecret'),
-				'isActivated'=>true,
-				'verified'=>true,
-			]
-		)->first();
+            [ 
+                'hash'=>$request->input('inputMerchId'),
+                'secret'=>$request->input('inputMerchSecret'),
+                'isActivated'=>true,
+                'verified'=>true,
+            ]
+        )->first();
         if (!isset($user) || !$user->isVerified()) {
             Log::error('Cannot find merchant, error');
             return view('merch.notfound');
@@ -273,14 +277,14 @@ class MVPController extends Controller
         Log::debug('Input data validated, going to create button');
         
         $buttonRnd = random_int(0, PHP_INT_MAX);
-		$u_secret = $request->input('inputMerchId');
-		$i_name = $request->input('inputItemName');
-		$i_price = $request->input('inputItemPrice');
-		$i_curr = $request->input('inputItemCurrency');
-		$i_id = $request->input('inputItemID');
-		$b_size = $request->input('inputButtonSize');
-		$b_color = $request->input('inputButtonColor');
-		$b_text = $request->input('inputButtonText');
+        $u_secret = $request->input('inputMerchId');
+        $i_name = $request->input('inputItemName');
+        $i_price = $request->input('inputItemPrice');
+        $i_curr = $request->input('inputItemCurrency');
+        $i_id = $request->input('inputItemID');
+        $b_size = $request->input('inputButtonSize');
+        $b_color = $request->input('inputButtonColor');
+        $b_text = $request->input('inputButtonText');
 
         $complexStyle = 'font-family: Helvetica, arial; font-weight: bold; border: none; text-align: center; text-decoration: none; display: inline-block; box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 8px 10px 0 rgba(0,0,0,0.19); padding: 1em;';
         $complexStyle .= 'background-color: '.$b_color.'; color: white;';
@@ -354,8 +358,8 @@ BUTTON_TEXT;
      */
     public function merchantVerified(Request $request)
     {
-	    return view('merch.verified');
-	}
+        return view('merch.verified');
+    }
 
     /**
      * Method for showing merchant info page
@@ -374,8 +378,8 @@ BUTTON_TEXT;
         );
         $user = \App\User::where(['hash'=>$request->input('hash')])->first();
 
-		return view('merch.info')->with('user',$user);
-	}
+        return view('merch.info')->with('user', $user);
+    }
 
     /**
      * Method for showing merchant info page
@@ -393,13 +397,13 @@ BUTTON_TEXT;
             ]
         );
         $user = \App\User::where(['hash'=>$request->input('hash')])->first();
-		$user->isActivated = true;
-		$user->save();
+        $user->isActivated = true;
+        $user->save();
 
-		Event::fire(new MerchantCreatedEvent($user));
+        Event::fire(new MerchantCreatedEvent($user));
 
-		return view('merch.activated');
-	}
+        return view('merch.activated');
+    }
 
     /**
      * Method for calling cryptogateway service
@@ -435,7 +439,10 @@ BUTTON_TEXT;
                 ]
             );
 
-            Log::debug('Called service, got:'.$res->getStatusCode().':'.$res->getBody());
+            Log::debug(
+                'Called service, got:'.$res->getStatusCode().':'.
+                $res->getBody()
+            );
 
             if ($res->getStatusCode()==200) { // request succeeded
                 return json_decode($res->getBody(), true);
@@ -443,10 +450,17 @@ BUTTON_TEXT;
                 return false;
             }
         } catch (\GuzzleHttp\Exception\ClientException $ex) {
-            Log::error('Error calling CGW service not found error: '.$ex->getResponse()->getStatusCode());
+            Log::error(
+                'Error calling CGW service not found error: '.
+                $ex->getResponse()->getStatusCode()
+            );
             return false;
         } catch (\GuzzleHttp\Exception\TransferException $ex) {
-            Log::error('Other error occured calling CGW service: ['.$ex->getResponse()->getStatusCode().']: '.$ex->getResponse()->getBody());
+            Log::error(
+                'Other error occured calling CGW service: ['.
+                $ex->getResponse()->getStatusCode().']: '.
+                $ex->getResponse()->getBody()
+            );
             return false;
         }
     }

@@ -1,101 +1,60 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-<div class="page-header center-block">
-<h1>Create new payment button</h1>
+<main class="content">
+            <div class="inner">
+                <div class="breadcrumbs">
+                    <a href="browser.history.back();">Back</a>
+                </div>
 
-<form method="post" action="{{ url('/merchant/unibutton') }}" class="form-horizontal">
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">To create new payment button please fill in fields below</h3>
-  </div>
-  <div class="panel-body">
-  {{ csrf_field() }}
-  <div class="form-group">
-    <label for="inputMerchId" class="col-sm-2 control-label">Merchant ID (from email) *</label>
-    <div class="col-sm-4">
-    <input type="text" class="form-control" id="inputMerchId" name="inputMerchId" placeholder="Merchant ID" required>
-    </div>
-    <label for="inputMerchSecret" class="col-sm-2 control-label">Merchant Pass Code (from email) *</label>
-    <div class="col-sm-4">
-    <input type="text" class="form-control" id="inputMerchSecret" name="inputMerchSecret" placeholder="Merchant secret" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputItemName" class="col-sm-2 control-label">Item name *</label>
-    <div class="col-sm-4">
-    <input type="text" class="form-control" id="inputItemName" name="inputItemName" placeholder="Item name" required>
-    </div>
-    <label for="inputItemID" class="col-sm-2 control-label">Item ID</label>
-    <div class="col-sm-4">
-    <input type="text" class="form-control" id="inputItemID" name="inputItemID" placeholder="Item ID" >
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputItemPrice" class="col-sm-2 control-label">Item price *</label>
-    <div class="col-sm-4">
-    <input type="number" class="form-control" id="inputItemPrice" name="inputItemPrice" placeholder="Item price" >
-    </div>
-    <label for="inputItemCurrency" class="col-sm-2 control-label">Item sell currency</label>
-    <div class="col-sm-4">
-    <select class="form-control" id="inputItemCurrency" name="inputItemCurrency" required>
-        <option value="USD" selected>USD</option>
-        <option value="EUR">EUR</option>
-        <option value="RUR">RUR</option>
-        <option value="CHF">CHF</option>
-        <option value="CAD">CAD</option>
-        <option value="CNY">CNY</option>
-        <option value="JPY">JPY</option>
-        <option value="AUD">AUD</option>
-        <option value="INR">INR</option>
-    </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputButtonText" class="col-sm-1 control-label">Button text</label>
-    <div class="col-sm-3">
-    <input type="text" class="form-control" id="inputButtonText" name="inputButtonText" placeholder="Button text" value="Buy with Ether">
-    </div>
-    <label for="inputButtonSize" class="col-sm-1 control-label">Button size</label>
-    <div class="col-sm-3">    
-    <select class="form-control" id="inputButtonSize" name="inputButtonSize" required>    
-        <option value="S">Small</option>
-        <option value="M" selected>Medium</option>
-        <option value="L">Large</option>        
-    </select>
-    </div>
-    <label for="inputButtonColor" class="col-sm-2 control-label">Button color</label>
-    <div class="col-sm-2">
-    <input type="color" class="form-control" id="inputButtonColor" name="inputButtonColor" value="#ff0000">
-    </div>
-  </div>  
-</div>
-<p class="bg-danger">
-@if (count($errors)>0)
-<ul>
-@foreach ($errors->all() as $error)
-   <li>{{ $error }}</li>
-@endforeach
-</ul>
-@endif
-</p>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
-    <h3 class="panel-title">Button preview</h3>
-  </div>
-<div class="panel-body center-block" id="buttonPreview">
-<iframe frameborder="0" width="100%" height="90px"></iframe>
-</div>
-</div>
-  <button type="submit" class="btn btn-success">Create button</button>
-</form>
-</div>
-</div></div></div>
+                <h2>Create cryptopayment button</h2>
+                <form method="post" action="{{ url('/merchant/unibutton') }}" class="fstyled formbtn">
+                {{ csrf_field() }}
+                    <p class="info"><span class="ipd">Complete the following fields to create your Cryptopayment button:</span></p>
+
+                    <div class="clearfix">
+                        <div class="fc2">
+                            <input placeholder="Merchant ID (from email)*" type="text" id="inputMerchId" name="inputMerchId" required>
+                            <input type="text" id="inputItemName" name="inputItemName" required placeholder="Item name*">
+                            <input type="number" id="inputItemPrice" name="inputItemPrice" placeholder="Item price*">
+                        </div>
+                        <div class="fc2 right clearfix">
+                            <input type="text" id="inputMerchSecret" name="inputMerchSecret" required placeholder="Merchant Pass Code (from email)*">
+                            <input type="text" id="inputItemID" name="inputItemID" placeholder="Item ID">
+                            <span class="lbl">Sale currency</span>
+                            <select class="sel right curr clearfix" id="inputItemCurrency" name="inputItemCurrency" required>
+						<option value="USD" selected>US dollars</option>
+						<option value="EUR">EUR</option>
+						<option value="GBP">GBP</option>
+					</select>
+                        </div>
+                    </div>
+                    <ul class="f3c clearfix">
+                        <li class="c1"><input type="text" name="itxt" class="itxt js-butcng" placeholder="Button text"></li>
+                        <li class="c2"><span class="lbl">Choose button size</span>
+                            <select class="sel xsize right js-butcng" id="inputButtonSize" name="inputButtonSize" required>
+						<option value="M" selected>Medium</option>
+						<option value="S">Small</option>
+						<option value="L">Large</option>
+					    </select>
+                        </li>
+                        <li class="c3">
+                            <span class="lbl">Choose button color</span>
+                            <div class="rel right rrcb">
+                                <div class="colorbox" style="background-color: #55288c;"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="butprv" id="buttonPreview">Button preview
+                    <button id="cbtn" class="cc cryptbutton"></button>
+                    </div>
+                    <button class="btn-green" type="submit">Create button</button>
+                </form>
+            </div>
+        </main>
+        <!-- .content -->
+
 @endsection
 @section('add-js')
 <script>
