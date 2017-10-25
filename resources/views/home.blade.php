@@ -50,7 +50,7 @@
                     <div class="h1">Cryptany mobile<br>wallet for merchants</div>
                     <p>A secure mobile wallet to safely accept, store and spend cryptocurrencies.<br> Download the beta-version now.</p>
                     <a class="gplay" href="#"><img src="{{ url('img/gp.png') }}" alt=""></a>
-                    <div class="yt"><a href="#"><img src="{{ url('img/yt.png') }}" alt="">Watch demo on YouTube</a></div>
+                    <div class="yt"><a href="https://www.youtube.com/c/Cryptany" target="_blank"><img src="{{ url('img/yt.png') }}" alt="">Watch demo on YouTube</a></div>
                 </div>
             </section>
             <section class="bricks clearfix">
@@ -85,11 +85,20 @@
                 <li><a href="https://www.facebook.com/cryptany/"><span class="icon icon-fb"></span></a></li>
                 <li><a href="https://www.instagram.com/cryptany.io/"><span class="icon icon-ig"></span></a></li>
                 <li><a href="https://cryptany.herokuapp.com"><span class="icon icon-slack"></span></a></li>
-                <li><a href="https://t.me/cryptany.io"><span class="icon icon-telegram"></span></a></li>
+                <li><a href="https://t.me/joinchat/DK-4-0MzkB_Qk2uDHzO94Q"><span class="icon icon-telegram"></span></a></li>
             </ul>
         </div>
     </footer>
     <!-- .footer -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108547971-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108547971-1');
+</script>
 
 </body>
 

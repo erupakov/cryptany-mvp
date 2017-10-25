@@ -1,86 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="margin: 2em 3em;">
-            <div class="page-header center-block">
-                <h2>Magento 1.x CE plugin installation</h2>
-                <p>Please follow this steps to install and configure Magento 1.x Community Edition payment plugin</p>
-            </div>
+<main class="content txt">
+<div class="inner">
+    <div class="breadcrumbs">
+        <a href="javascript:history.go(-1);">Back</a>
+    </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">1. Register merchant</h4>
-                </div>
-                <div class="panel-body center-block">
-                <ol>
-                    <li>Click <a href="{{ url('/merchant/register') }}">this link</a> to go to the merchant registration page.</li>
-                    <li>Fill in all required fields in registration form
-                    <a href="{{ url('/img/reg_merch_1.png') }}" data-lightbox="image-5" data-title="Registration step 1"><img src="{{ url('/img/reg_merch_1.png') }}" class="img-responsible" width="120px;"></a>
-                    </li>
-                    <ol>
-                        <li>Merchant name (for example, your store name)</li>
-                        <li>Site URL</li>
-                        <li>Your Ethereum wallet address to receive crypto to</li>
-                        <li>Contact email (it will be validated, it should be unique througout our system)</li>
-                        <li>Contact person</li>
-                    </ol>
-                    <li>Press Submit button and get a successfull registration message:
-                    <a href="{{ url('/img/reg_merch_2.png') }}" data-lightbox="image-5" data-title="Registration step 2"><img src="{{ url('/img/reg_merch_2.png') }}" class="img-responsible" width="120px;"></a>
-                    </li>
-                    <li>After a few minutes you'll receive an email address validation message to you mailbox.
-                    You may need to look into Spam folder in case email provider filters it out</li>
-                    <li>Click the verification link you received in an email
-                    <a href="{{ url('/img/reg_merch_3.png') }}" data-lightbox="image-5" data-title="Registration step 3"><img src="{{ url('/img/reg_merch_3.png') }}" class="img-responsible" width="120px;"></a>
-                    </li>
-                    <li>After you verified your email address we will performs some KYC and ALM checks that can take some time.
-                    <a href="{{ url('/img/reg_merch_4.png') }}" data-lightbox="image-5" data-title="Registration step 4"><img src="{{ url('/img/reg_merch_4.png') }}" class="img-responsible" width="120px;"></a>
-                    </li>
-                    <li>
-                    After checks successfully passed we will activate the account and you will receive an email with 
-                    Merchant ID and Merchand Pass Code you will use in all our products.
-                    <a href="{{ url('/img/reg_merch_5.png') }}" data-lightbox="image-5" data-title="Registration step 5"><img src="{{ url('/img/reg_merch_5.png') }}" class="img-responsible" width="120px;"></a>
-                    </li>
-                </ol>
-                </div>
-            </div>
+    <h2>Cryptopayment button plugin setup for Magento 1.x CE</h2>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">2. Install Magento 1.x CE plugin</h4>
-                </div>
-                <div class="panel-body center-block">
-                <p>To install plugin simply unzip the contents of the package into root directory of the Magento 1.x CE installation. 
-                None of the existing files will be overwritten.
-                <a href="{{ url('/img/mag1_config_4.png') }}" data-lightbox="image-7" data-title="Installation"><img src="{{ url('/img/mag1_config_4.png') }}" class="img-responsible" width="120px;"></a>
-                </p>
-                </div>
-            </div>
+	<h4>1. Setup requirements</h4>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">3. Configure Magento 1.x CE plugin</h4>
-                </div>
-                <div class="panel-body center-block">
-<ol>
-<li>Open store admin panel and go to System -> Configuration menu
-<a href="{{ url('/img/mag1_config_1.png') }}" data-lightbox="image-8" data-title="Configuration step 1"><img src="{{ url('/img/mag1_config_1.png') }}" class="img-responsible" width="120px;"></a>
-</li>8
-<li>Open Sales -> Payment methods section
-<a href="{{ url('/img/mag1_config_2.png') }}" data-lightbox="image-8" data-title="Configuration step 2"><img src="{{ url('/img/mag1_config_2.png') }}" class="img-responsible" width="120px;"></a>
-</li>
-<li>Locate Cryptany Payment Gateway section, open it and fill in Merchant ID and Merchant Pass Code (1,2) fields with values from merchant activation email and press Save config button (3).
-<a href="{{ url('/img/mag1_config_3.png') }}" data-lightbox="image-8" data-title="Configuration step 3"><img src="{{ url('/img/mag1_config_3.png') }}" class="img-responsible" width="120px;"></a>
-</li>
-</ol>
-                </div>
-            </div>
+    <p>To set up your Cryptopayment plugin for Magento 1.x CE, you will need to provide Cryptany with the following
+	information:
+	<ul>
+		<li>the address of your Ethereum wallet</li>
+		<li>a completed <a href="{{ url('/merchant/register') }}">registration form</a></li>
+	</ul>
+	<p>Note: if you do not already have an Ethereum wallet, you can create one <a href="https://www.myetherwallet.com">here</a>.</p>
+	<p>Upon completing the registration form, you will receive an email at the indicated address with a
+	link to verify that the information is correct. When your merchant account is successfully
+	activated, you will receive another email with your Merchant ID and Merchant Pass Code that
+	you can use to set up a Cryptopayment button for your Magento store.</p>
+    <p>
+        <img src="{{ url('img/ht1.jpg') }}" alt="">
+    </p>
 
-            <div>
-                <h4 class="panel-title">4. You are ready</h4>
-                <p>Congratulations! Now you're ready to receive payments in your store using Ethereum and decentralized trust management and escrow from Cryptany!</p>
-            </div>
-			<div style="padding-bottom: 4em;">&nbsp;</div>
+	<h4>2. Install the Cryptopayment plugin for Magento 1.x CE</h4>
+    <p>To install the plugin, simply unzip the contents of the package in the root directory of the Magento 1.x CE installation. 
+	No existing files will be overwritten.</p>
+    <p>
+        <img src="{{ url('img/ht2.jpg') }}" alt="">
+    </p>
+
+    <h4>3. Configure the Cryptopayment plugin for Magento 1.x CE</h4>
+    <p>3.1. Open the store admin panel and go to System -> Configuration menu.</p>
+	<p>3.2. Open Sales -> Payment methods section</p>
+	<p>3.3. Locate the Cryptany Payment Gateway section, open it and copy and paste your Merchant ID and Merchant Pass Code 
+	from the merchant activation email (1,2) in the appropriate fields and press the Save config button (3).</p>
+    <p>
+        <img src="{{ url('img/ht5.jpg') }}" alt="">
+    </p>
+    <h4>4. Your Cryptopayment button is ready.</h4>
+    <p>Congratulations! Your online store is now ready to receive payments in Ethereum utilizing the Cryptany Trusted Payment Network 
+	for real time cryptocurrency payments!</p>
+
 </div>
+</main>
+<!-- .content -->
+
 @endsection
 @section('add-js')
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

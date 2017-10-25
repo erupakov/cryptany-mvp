@@ -36,12 +36,21 @@
                 <li><a href="https://www.facebook.com/cryptany/"><span class="icon icon-fb"></span></a></li>
                 <li><a href="https://www.instagram.com/cryptany.io/"><span class="icon icon-ig"></span></a></li>
                 <li><a href="https://cryptany.herokuapp.com"><span class="icon icon-slack"></span></a></li>
-                <li><a href="https://t.me/cryptany.io"><span class="icon icon-telegram"></span></a></li>
+                <li><a href="https://t.me/joinchat/DK-4-0MzkB_Qk2uDHzO94Q"><span class="icon icon-telegram"></span></a></li>
             </ul>
         </div>
     </footer>
     <!-- .footer -->
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108547971-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108547971-1');
+</script>
     @yield('add-js')
 
     </body>

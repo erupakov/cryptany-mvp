@@ -18,10 +18,15 @@
 </div>
 @endsection
 @section('add-js')
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
 <script>
 $(document).ready(function() {
     new Clipboard('#btnCopyAddress');
+	ga('send', 'event', {
+	    eventCategory: 'Button',
+	    eventAction: 'created'
+	});
 });
 </script>
 @endsection
