@@ -1,6 +1,6 @@
 function updateTransactionUnconfirmedStatus(data) {
     console.log('Updating transaction status: Unconfirmed');
-    location.reload(); // quick hack, will update without reloading later
+    $('txstatus_3').text(''); // quick hack, will update without reloading later
 }
 
 function updateTransactionConfirmedStatus(data) {

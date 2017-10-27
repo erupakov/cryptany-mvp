@@ -47,7 +47,7 @@
             <section class="wallet">
                 <div class="inner">
                     <img src="img/phone.png" class="wphone" alt="">
-                    <div class="h1">Cryptany mobile<br>wallet for merchants</div>
+                    <div class="h1">Cryptany mobile<br>wallet</div>
                     <p>A secure mobile wallet to safely accept, store and spend cryptocurrencies.<br> Download the beta-version now.</p>
                     <a class="gplay" href="#"><img src="{{ url('img/gp.png') }}" alt=""></a>
                     <div class="yt"><a href="https://www.youtube.com/c/Cryptany" target="_blank"><img src="{{ url('img/yt.png') }}" alt="">Watch demo on YouTube</a></div>

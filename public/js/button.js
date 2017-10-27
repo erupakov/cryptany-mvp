@@ -16,6 +16,7 @@ $('.colorbox').colpick({
 	onSubmit:function(hsb,hex,rgb,el) {
 		$(el).css('background-color', '#'+hex);
 		$(el).colpickHide();
+		$('input#inputButtonColor').val('#'+hex);
         CbuttonSet();
 	}
 })

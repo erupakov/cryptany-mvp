@@ -14,15 +14,15 @@
 
                     <div class="clearfix">
                         <div class="fc2">
-                            <input placeholder="Merchant ID (from email)*" type="text" id="inputMerchId" name="inputMerchId" required>
-                            <input type="text" id="inputItemName" name="inputItemName" required placeholder="Item name*">
-                            <input type="number" id="inputItemPrice" name="inputItemPrice" placeholder="Item price*">
+                            <input placeholder="Merchant ID (from email)*" type="text" id="inputMerchId" name="inputMerchId" required tabindex="1">
+                            <input type="text" id="inputItemName" name="inputItemName" required placeholder="Item name*" tabindex="3">
+                            <input type="number" id="inputItemPrice" name="inputItemPrice" placeholder="Item price*" tabindex="5">
                         </div>
                         <div class="fc2 right clearfix">
-                            <input type="text" id="inputMerchSecret" name="inputMerchSecret" required placeholder="Merchant Pass Code (from email)*">
-                            <input type="text" id="inputItemID" name="inputItemID" placeholder="Item ID">
+                            <input type="text" id="inputMerchSecret" name="inputMerchSecret" required placeholder="Merchant Pass Code (from email)*" tabindex="2">
+                            <input type="text" id="inputItemID" name="inputItemID" placeholder="Item ID" tabindex="4">
                             <span class="lbl">Sale currency</span>
-                            <select class="sel right curr clearfix" id="inputItemCurrency" name="inputItemCurrency" required>
+                            <select class="sel right curr clearfix" id="inputItemCurrency" name="inputItemCurrency" required tabindex="6">
 						<option value="USD" selected>US dollars</option>
 						<option value="EUR">EUR</option>
 						<option value="GBP">GBP</option>
@@ -30,9 +30,9 @@
                         </div>
                     </div>
                     <ul class="f3c clearfix">
-                        <li class="c1"><input type="text" name="inputButtonText" class="itxt js-butcng" placeholder="Button text"></li>
+                        <li class="c1"><input type="text" name="inputButtonText" class="itxt js-butcng" placeholder="Button text" tabindex="7"></li>
                         <li class="c2"><span class="lbl">Choose button size</span>
-                            <select class="sel xsize right js-butcng" id="inputButtonSize" name="inputButtonSize" required>
+                            <select class="sel xsize right js-butcng" id="inputButtonSize" name="inputButtonSize" required tabindex="8">
 						<option value="medium" selected>Medium</option>
 						<option value="small">Small</option>
 						<option value="large">Large</option>
@@ -47,8 +47,9 @@
                     </ul>
                     <hr>
                     <div class="butprv" id="buttonPreview">Button preview
-                    <button id="cbtn" class="cc cryptbutton"></button>
+                    <button id="cbtn" class="cc cryptbutton" type="button"></button>
                     </div>
+					<input type="hidden" name="inputButtonColor" id="inputButtonColor" value="#55288c" tabindex="9">
                     <button class="btn-green" type="submit">Create button</button>
                 </form>
             </div>

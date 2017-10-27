@@ -285,12 +285,16 @@ class MVPController extends Controller
         $b_color = $request->input('inputButtonColor');
         $b_text = $request->input('inputButtonText');
 
+		if (null == $b_color) {
+			$b_color = '#55288c';
+		}
+
         $complexStyle = 'font-family: Helvetica, arial; font-weight: bold; border: none; text-align: center; text-decoration: none; display: inline-block; box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2), 0 8px 10px 0 rgba(0,0,0,0.19); padding: 1em;';
         $complexStyle .= 'background-color: '.$b_color.'; color: white;';
 
-        if ($b_size=='L') {
+        if ($b_size=='large') {
             $complexStyle .= 'font-size: 20px; border-radius: 6px;';
-        } elseif ($b_size=='M') {
+        } elseif ($b_size=='medium') {
             $complexStyle .= 'font-size: 16px; border-radius: 5px;';
         } else {
             $complexStyle .= 'font-size: 14px; border-radius: 3px;';

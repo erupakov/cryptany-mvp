@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<h4>New merchant activation: Success</h4>
-<p>Your have successfully activated new merchant</p>
+        <main class="content">
+            <div class="inner">
+                <div class="breadcrumbs">
+                    <a href="">Back</a>
+                </div>
+
+                <h2>New merchant activation: <span class="hl">Success</span></h2>
+                <p class="grayed">You have successfully activated new merchant</p>
+            </div>
+        </main>
+        <!-- .content -->
 @endsection
 @section('add-js')
 @endsection

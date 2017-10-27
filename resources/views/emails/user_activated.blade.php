@@ -11,7 +11,7 @@
 <li>Project URL: {{ $user->projectURL }}</li>
 </ul>
 
-<p>Please open this link to create a Cryptopayment button for your website:<a href="{{ url('/merchant/unibutton') }}">Payment button</a></p>
+<p>Please open this link to create a Cryptopayment button for your website:&nbsp;<a href="{{ url('/merchant/unibutton') }}">Payment button</a></p>
 
 Thanks,<br>
 the Cryptany team
